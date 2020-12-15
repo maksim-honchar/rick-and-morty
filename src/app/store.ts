@@ -1,19 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import { useDispatch } from "react-redux";
-import counterReducer from "../features/counter/counterSlice";
+import charactersReducer from "../features/characters/charactersSlice";
 import { saveState } from "./sessionStorage";
 import throttle from "lodash.throttle";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    characters: charactersReducer,
   },
 });
 
 store.subscribe(
   throttle(() => {
     saveState({
-      counter: store.getState().counter,
+      characters: store.getState().characters,
     });
   }, 1000)
 );

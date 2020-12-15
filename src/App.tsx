@@ -1,17 +1,13 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { Page1 } from "./components/Page1";
-import { Page2 } from "./components/Page2";
+import { Characters } from "./features/characters/Characters";
 
 export default function App() {
   return (
-    <div className="App" style={{ textAlign: "center" }}>
+    <div className="App">
       <Router>
-        <Link to="/">Page1</Link>
-        <Link to="/page2">Page2</Link>
         <Switch>
-          <Route exact path="/" component={Page1} />
-          <Route path="/page2" component={Page2} />
+          <Route exact path="/" component={Characters} />
         </Switch>
       </Router>
     </div>

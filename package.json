@@ -4,10 +4,13 @@
   "private": false,
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@reduxjs/toolkit": "^1.5.0",
+    "@types/lodash.throttle": "^4.1.6",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-redux": "^7.1.12",
+    "@types/react-router-dom": "^5.1.6",
     "lodash.throttle": "^4.1.1",
     "react": "latest",
     "react-dom": "latest",
@@ -34,8 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@types/lodash.throttle": "^4.1.6",
-    "@types/react-router-dom": "^5.1.6"
-  }
+  "devDependencies": {}
 }
