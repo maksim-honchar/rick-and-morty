@@ -1,69 +1,77 @@
 import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectPagination } from "./charactersSlice";
 import { charactersURL } from "../../app/utils";
-import PaginationCharacters from "./PaginCharacters";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import PaginationPanel from "../../components/PaginationPanel";
+import CardCharacter from "./CardCharacter";
+import FilterCharacters from "./FilterCharacters";
 
-interface ICharacter {
-  id: string;
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    card_character: {
+      textAlign: "center",
+    },
+  })
+);
+
+export interface ICharacter {
   name: string;
+  image: string;
+  id: string;
+  species: string;
+  status: string;
+  gender: string;
 }
 
 export const Characters = () => {
-  const pagination = useSelector(selectPagination);
-  const [totalCharacters, setTotalCharactes] = useState(0);
+  const classes = useStyles();
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [characters, setCharacters] = useState([]);
-  const [resultPagin, setResultPagin] = useState([
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-  ]);
 
   const outputCharaters = characters.map((character: ICharacter) => (
-    <p key={character.id}>
-      {character.name} - id [{character.id}]
-    </p>
+    <Grid
+      className={classes.card_character}
+      key={character.id}
+      item
+      lg={3}
+      sm={6}
+      md={4}
+      xs={12}
+    >
+      <CardCharacter
+        id={character.id}
+        name={character.name}
+        image={character.image}
+        species={character.species}
+        status={character.status}
+        gender={character.gender}
+      />
+    </Grid>
   ));
 
   useEffect(() => {
-    fetch(charactersURL)
-      .then((response) => response.json())
-      .then((output) => {
-        setTotalCharactes(Math.floor(output.info.count / 10));
-      });
-  }, []);
-
-  let interrim;
-  const computePagination = (paginNum: number) => {
-    interrim = [];
-    for (let i = paginNum - 9; i <= paginNum; i++) {
-      interrim.push(i);
+    try {
+      fetch(`${charactersURL}/?page=${currentPage}&`)
+        .then((response) => response.json())
+        .then((output) => {
+          setCharacters(output.results);
+          setTotalPages(output.info.pages);
+        });
+    } catch (error) {
+      console.error(error);
     }
-    setResultPagin(interrim);
-  };
-
-  useEffect(() => {
-    fetch(`${charactersURL}/${resultPagin}`)
-      .then((response) => response.json())
-      .then((output) => setCharacters(output));
-  }, [pagination]);
-
-  console.log(pagination);
+  }, [currentPage]);
 
   return (
     <Fragment>
-      <h2>Characters</h2>
-      {outputCharaters}
-      <PaginationCharacters
-        totalCharacters={totalCharacters}
-        computePagination={computePagination}
+      <FilterCharacters />
+      <Grid container spacing={3} justify="center">
+        {outputCharaters}
+      </Grid>
+      <PaginationPanel
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
       />
     </Fragment>
   );
