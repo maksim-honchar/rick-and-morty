@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+
 import Pagination from "@material-ui/lab/Pagination";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) =>
@@ -8,14 +10,7 @@ const useStyles = makeStyles((theme) =>
     root: {
       "& > * + *": {
         margin: theme.spacing(2),
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
       },
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
     },
     page: {
       marginTop: 30,
@@ -23,12 +18,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface IPaginCharactersProps {
+interface IPaginationPanelProps {
   totalPages: number;
   setCurrentPage: (page: number) => void;
 }
 
-export default function PaginationPanel(props: IPaginCharactersProps) {
+export default function PaginationPanel(props: IPaginationPanelProps) {
   const classes = useStyles();
   const [page, setPage] = useState(1);
 
@@ -41,17 +36,23 @@ export default function PaginationPanel(props: IPaginCharactersProps) {
   }, [page]);
 
   return (
-    <div className={classes.root}>
-      <div className={classes.page}>
+    <Grid
+      className={classes.root}
+      container
+      direction="column"
+      alignItems="center"
+      justify="center"
+    >
+      <Grid className={classes.page} item>
         <Typography>Page: {page}</Typography>
-      </div>
-      <div>
+      </Grid>
+      <Grid item>
         <Pagination
           count={props.totalPages}
           page={page}
           onChange={handleChange}
         />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }

@@ -1,15 +1,24 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { charactersURL } from "../../app/utils";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PaginationPanel from "../../components/PaginationPanel";
 import CardCharacter from "./CardCharacter";
-import FilterCharacters from "./FilterCharacters";
+
+import FilterSpecies from "./FilterSpecies";
+import FilterStatus from "./FilterStatus";
+import FilterGender from "./FilterGender";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card_character: {
       textAlign: "center",
+    },
+    filter: {
+      border: "1px solid white",
+      height: "1px",
+      marginBottom: "40px",
     },
   })
 );
@@ -28,6 +37,8 @@ export const Characters = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [characters, setCharacters] = useState([]);
+  const [filter, setFilter] = useState("");
+  const formatFilter = filter.toString();
 
   const outputCharaters = characters.map((character: ICharacter) => (
     <Grid
@@ -52,7 +63,7 @@ export const Characters = () => {
 
   useEffect(() => {
     try {
-      fetch(`${charactersURL}/?page=${currentPage}&`)
+      fetch(`${charactersURL}/?page=${currentPage}&${filter}`)
         .then((response) => response.json())
         .then((output) => {
           setCharacters(output.results);
@@ -61,11 +72,36 @@ export const Characters = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [currentPage]);
+  }, [currentPage, filter]);
+
+  const viewFilter = (query: string) => {
+    const regex = /=/;
+    if (formatFilter !== "[object Object]") {
+      return `[ ${query.replace(regex, ": ")} ]`;
+    }
+  };
 
   return (
-    <Fragment>
-      <FilterCharacters />
+    <Grid container alignItems="center" justify="center">
+      <Grid container direction="row" alignItems="center" justify="center">
+        <Grid item>
+          <FilterSpecies setFilter={setFilter} />
+        </Grid>
+        <Grid item>
+          <FilterStatus setFilter={setFilter} />
+        </Grid>
+        <Grid item>
+          <FilterGender setFilter={setFilter} />
+        </Grid>
+      </Grid>
+      <Grid item className={classes.filter}>
+        <Typography color="textSecondary">
+          {formatFilter === "" || formatFilter === "[object Object]"
+            ? "[ All ]"
+            : viewFilter(filter)}
+        </Typography>
+        {/*Если вызов фильтра не завершился выбором - приложение падает  */}
+      </Grid>
       <Grid container spacing={3} justify="center">
         {outputCharaters}
       </Grid>
@@ -73,6 +109,6 @@ export const Characters = () => {
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
       />
-    </Fragment>
+    </Grid>
   );
 };
