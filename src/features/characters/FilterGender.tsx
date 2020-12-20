@@ -13,6 +13,7 @@ export default function FilterGender(props: IFilter) {
 
   const handleClose = (filter: string) => {
     setAnchorEl(null);
+    props.setCurrentPage(1);
     props.setFilter(filter);
   };
 

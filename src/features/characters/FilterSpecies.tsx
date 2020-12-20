@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 export interface IFilter {
   setFilter: (filter: string) => void;
+  setCurrentPage: (page: number) => void;
 }
 
 export default function FilterSpecies(props: IFilter) {
@@ -16,6 +17,7 @@ export default function FilterSpecies(props: IFilter) {
 
   const handleClose = (filter: string) => {
     setAnchorEl(null);
+    props.setCurrentPage(1);
     props.setFilter(filter);
   };
 

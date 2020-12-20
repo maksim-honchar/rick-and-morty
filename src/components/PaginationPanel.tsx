@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       },
     },
     page: {
-      marginTop: 30,
+      margin: "30px auto",
     },
   })
 );
@@ -43,10 +43,7 @@ export default function PaginationPanel(props: IPaginationPanelProps) {
       alignItems="center"
       justify="center"
     >
-      <Grid className={classes.page} item>
-        <Typography>Page: {page}</Typography>
-      </Grid>
-      <Grid item>
+      <Grid item className={classes.page}>
         <Pagination
           count={props.totalPages}
           page={page}

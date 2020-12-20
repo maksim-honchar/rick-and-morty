@@ -76,22 +76,23 @@ export const Characters = () => {
 
   const viewFilter = (query: string) => {
     const regex = /=/;
-    if (formatFilter !== "[object Object]") {
-      return `[ ${query.replace(regex, ": ")} ]`;
-    }
+    return `[ ${query.replace(regex, ": ")} ]`;
   };
 
   return (
     <Grid container alignItems="center" justify="center">
       <Grid container direction="row" alignItems="center" justify="center">
         <Grid item>
-          <FilterSpecies setFilter={setFilter} />
+          <FilterSpecies
+            setFilter={setFilter}
+            setCurrentPage={setCurrentPage}
+          />
         </Grid>
         <Grid item>
-          <FilterStatus setFilter={setFilter} />
+          <FilterStatus setFilter={setFilter} setCurrentPage={setCurrentPage} />
         </Grid>
         <Grid item>
-          <FilterGender setFilter={setFilter} />
+          <FilterGender setFilter={setFilter} setCurrentPage={setCurrentPage} />
         </Grid>
       </Grid>
       <Grid item className={classes.filter}>
