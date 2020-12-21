@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { charactersURL } from "../../app/utils";
+
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
+
 import PaginationPanel from "../../components/PaginationPanel";
 import CardCharacter from "./CardCharacter";
-
 import FilterSpecies from "./FilterSpecies";
 import FilterStatus from "./FilterStatus";
 import FilterGender from "./FilterGender";
-import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +31,9 @@ export interface ICharacter {
   species: string;
   status: string;
   gender: string;
+  origin: { name: string };
+  location: { name: string };
+  episode: string[];
 }
 
 export const Characters = () => {
@@ -38,7 +42,6 @@ export const Characters = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [characters, setCharacters] = useState([]);
   const [filter, setFilter] = useState("");
-  const formatFilter = filter.toString();
 
   const outputCharaters = characters.map((character: ICharacter) => (
     <Grid
@@ -57,6 +60,9 @@ export const Characters = () => {
         species={character.species}
         status={character.status}
         gender={character.gender}
+        origin={character.origin}
+        location={character.location}
+        episode={character.episode}
       />
     </Grid>
   ));
@@ -79,6 +85,8 @@ export const Characters = () => {
     return `[ ${query.replace(regex, ": ")} ]`;
   };
 
+  console.log(characters);
+
   return (
     <Grid container alignItems="center" justify="center">
       <Grid container direction="row" alignItems="center" justify="center">
@@ -97,7 +105,7 @@ export const Characters = () => {
       </Grid>
       <Grid item className={classes.filter}>
         <Typography color="textSecondary">
-          {formatFilter === "" || formatFilter === "[object Object]"
+          {filter === "" || typeof filter !== "string"
             ? "[ All ]"
             : viewFilter(filter)}
         </Typography>
