@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface ICharacter {
   name: string;
   image: string;
-  id: string;
   species: string;
   status: string;
   gender: string;
@@ -43,18 +42,17 @@ export const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [filter, setFilter] = useState("");
 
-  const outputCharaters = characters.map((character: ICharacter) => (
+  const outputCharaters = characters.map((character: ICharacter, index) => (
     <Grid
-      className={classes.card_character}
-      key={character.id}
       item
+      className={classes.card_character}
+      key={index}
       lg={3}
       sm={6}
       md={4}
       xs={12}
     >
       <CardCharacter
-        id={character.id}
         name={character.name}
         image={character.image}
         species={character.species}
@@ -85,8 +83,6 @@ export const Characters = () => {
     return `[ ${query.replace(regex, ": ")} ]`;
   };
 
-  console.log(characters);
-
   return (
     <Grid container alignItems="center" justify="center">
       <Grid container direction="row" alignItems="center" justify="center">
@@ -109,7 +105,6 @@ export const Characters = () => {
             ? "[ All ]"
             : viewFilter(filter)}
         </Typography>
-        {/*Если вызов фильтра не завершился выбором - приложение падает  */}
       </Grid>
       <Grid container spacing={3} justify="center">
         {outputCharaters}
