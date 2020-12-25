@@ -4,6 +4,7 @@ import { charactersURL } from "../../app/utils";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import PaginationPanel from "../../components/PaginationPanel";
 import CardCharacter from "./CardCharacter";
@@ -20,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       border: "1px solid white",
       height: "1px",
       marginBottom: "40px",
+    },
+    spiner: {
+      marginTop: "20vh",
     },
   })
 );
@@ -83,8 +87,8 @@ export const Characters = () => {
     return `[ ${query.replace(regex, ": ")} ]`;
   };
 
-  return (
-    <Grid container alignItems="center" justify="center">
+  const viewBlock = (
+    <>
       <Grid container direction="row" alignItems="center" justify="center">
         <Grid item>
           <FilterSpecies
@@ -113,6 +117,18 @@ export const Characters = () => {
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
       />
+    </>
+  );
+
+  const spiner = (
+    <Grid item className={classes.spiner}>
+      <CircularProgress />
+    </Grid>
+  );
+
+  return (
+    <Grid container alignItems="center" justify="center">
+      {characters.length < 20 ? spiner : viewBlock}
     </Grid>
   );
 };

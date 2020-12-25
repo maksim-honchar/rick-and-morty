@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ICharacter } from "./Characters";
 import "./PopupCard.scss";
-import { makeStyles } from "@material-ui/core/styles";
+
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,15 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Grid from "@material-ui/core/Grid";
-
-const useStyles = makeStyles({
-  media: {
-    // maxWidth: 300,
-    // height: 300,
-    // margin: "auto",
-    // borderRadius: 3,
-  },
-});
 
 interface IPopupCard extends ICharacter {
   handleClose: () => void;
@@ -31,7 +22,6 @@ interface Episode {
 }
 
 export default function PopupCard(props: IPopupCard) {
-  const classes = useStyles();
   const [episodes, setEpisodes] = useState<Array<Episode>>([]);
 
   useEffect(() => {
