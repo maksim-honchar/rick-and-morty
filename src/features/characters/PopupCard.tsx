@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ICharacter } from "./Characters";
+import "./PopupCard.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -12,15 +13,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 600,
-    minHeight: 600,
-  },
   media: {
-    maxWidth: 300,
-    height: 300,
-    margin: "auto",
-    borderRadius: 3,
+    // maxWidth: 300,
+    // height: 300,
+    // margin: "auto",
+    // borderRadius: 3,
   },
 });
 
@@ -45,11 +42,18 @@ export default function PopupCard(props: IPopupCard) {
   }, []);
 
   const listEpisodes = episodes.map((episode: Episode) => (
-    <Typography key={episode.id}>{episode.name}</Typography>
+    <Typography
+      key={episode.id}
+      color="textSecondary"
+      component="p"
+      variant="body2"
+    >
+      <span className="episodes">{episode.name}</span>
+    </Typography>
   ));
 
   return (
-    <Card className={classes.root}>
+    <Card className="root" /*  className={classes.root} */>
       <CardActions>
         <Grid container justify="flex-end">
           <Grid item>
@@ -60,33 +64,50 @@ export default function PopupCard(props: IPopupCard) {
         </Grid>
       </CardActions>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title={props.name}
-        />
+        <CardMedia className="media" image={props.image} title={props.name} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            species: {props.species}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            status: {props.status}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            gender: {props.gender}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            origin: {props.origin.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            location: {props.location.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="div">
-            episode: {listEpisodes}
-          </Typography>
+          <Grid
+            container
+            direction="column"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.name}
+            </Typography>
+            <Typography color="textSecondary" component="p">
+              <span className="episodes">
+                <strong>species:</strong> {props.species}
+              </span>
+            </Typography>
+            <Typography color="textSecondary" component="p">
+              <span className="episodes">
+                <strong>status: </strong>
+                {props.status}
+              </span>
+            </Typography>
+            <Typography color="textSecondary" component="p">
+              <span className="episodes">
+                <strong>gender:</strong> {props.gender}
+              </span>
+            </Typography>
+            <Typography color="textSecondary" component="p">
+              <span className="episodes">
+                <strong>origin:</strong> {props.origin.name}
+              </span>
+            </Typography>
+            <Typography color="textSecondary" component="p">
+              <span className="episodes">
+                <strong>location:</strong> {props.location.name}
+              </span>
+            </Typography>
+            <div className="episode-title">
+              <Typography color="textSecondary" component="p">
+                <strong>EPISODES:</strong>
+              </Typography>
+            </div>
+            {listEpisodes}
+          </Grid>
         </CardContent>
       </CardActionArea>
     </Card>
