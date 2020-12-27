@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import PaginationPanel from "../../components/PaginationPanel";
 import TableEpisodes from "./TableEpisodes";
+import SearchEpisodes from "./SearchEpisodes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,15 +33,15 @@ export const Episodes = () => {
   const [episodes, setEpisodes] = useState([]);
   const [filter, setFilter] = useState("");
 
-  const outputEpisodes = null;
-
   useEffect(() => {
     try {
-      fetch(`${episodesURL}/?page=${currentPage}&${filter}`)
+      fetch(`${episodesURL}/?page=${currentPage}&name=${filter}`)
         .then((response) => response.json())
         .then((output) => {
-          setEpisodes(output.results);
-          setTotalPages(output.info.pages);
+          if (output.results) {
+            setEpisodes(output.results);
+            setTotalPages(output.info.pages);
+          }
         });
     } catch (error) {
       console.error(error);
@@ -54,6 +55,7 @@ export const Episodes = () => {
 
   const viewBlock = (
     <>
+      <SearchEpisodes setFilter={setFilter} />
       <TableEpisodes episodes={episodes} />
       <PaginationPanel
         totalPages={totalPages}
@@ -68,12 +70,9 @@ export const Episodes = () => {
     </Grid>
   );
 
-  console.log(episodes);
-
   return (
     <Grid container alignItems="center" justify="center">
-      {/* {episodes.length < 20 ? spiner : viewBlock} */}
-      {viewBlock}
+      {episodes.length < 1 ? spiner : viewBlock}
     </Grid>
   );
 };

@@ -15,7 +15,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableEpisodes(props: any) {
+interface ITableEpisodes {
+  episodes: Array<{ name: string; air_date: string; id: number }>;
+}
+
+export default function TableEpisodes(props: ITableEpisodes) {
   const classes = useStyles();
 
   return (
@@ -28,8 +32,8 @@ export default function TableEpisodes(props: any) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.episodes.map((episode: any) => (
-            <TableRow key={episode.name}>
+          {props.episodes.map((episode) => (
+            <TableRow key={episode.id}>
               <TableCell component="th" scope="row">
                 {episode.name}
               </TableCell>

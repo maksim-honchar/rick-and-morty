@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -38,13 +38,13 @@ export default function NavPanel() {
     setValue(newValue);
   };
 
-  if (value === 0) {
-    history.push("/");
-  } else if (value === 1) {
-    history.push("/episodes");
-  }
-
-  console.log(value);
+  useEffect(() => {
+    if (value === 0) {
+      history.push("/");
+    } else if (value === 1) {
+      history.push("/episodes");
+    }
+  }, [value]);
 
   return (
     <div className={classes.root}>

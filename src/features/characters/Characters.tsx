@@ -128,7 +128,7 @@ export const Characters = () => {
 
   return (
     <Grid container alignItems="center" justify="center">
-      {characters.length < 20 ? spiner : viewBlock}
+      {characters.length < 1 ? spiner : viewBlock}
     </Grid>
   );
 };
