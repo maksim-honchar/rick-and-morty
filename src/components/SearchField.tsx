@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ISearchEpisodes {
+interface ISearchField {
   setFilter: (request: string) => void;
 }
 
-export default function SearchEpisodes(props: ISearchEpisodes) {
+export default function SearchField(props: ISearchField) {
   const classes = useStyles();
   const [request, setRequest] = useState("");
 
@@ -55,18 +55,16 @@ export default function SearchEpisodes(props: ISearchEpisodes) {
         className={clsx(classes.margin, classes.textField)}
         variant="outlined"
       >
-        <InputLabel htmlFor="outlined-adornment-password">
-          find episode by name
-        </InputLabel>
+        <InputLabel htmlFor="outlined-find-content">find by name</InputLabel>
         <OutlinedInput
-          id="find episode"
+          id="find content"
           value={request}
           onChange={handleChange}
           endAdornment={
             <InputAdornment position="end">
               <Tooltip title="clear">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="icon for clear"
                   onClick={handleClean}
                   edge="end"
                 >
@@ -75,7 +73,7 @@ export default function SearchEpisodes(props: ISearchEpisodes) {
               </Tooltip>
             </InputAdornment>
           }
-          labelWidth={155}
+          labelWidth={95}
         />
       </FormControl>
     </form>

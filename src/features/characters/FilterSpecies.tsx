@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
+import { IFilter } from "../../app/utils";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export interface IFilter {
-  setFilter: (filter: string) => void;
-  setCurrentPage: (page: number) => void;
-}
+// export interface IFilter {
+//   setFilter: (filter: string) => void;
+//   setCurrentPage: (page: number) => void;
+// }
 
 export default function FilterSpecies(props: IFilter) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

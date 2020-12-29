@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { IFilter } from "./FilterSpecies";
+import { IFilter } from "../../app/utils";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -23,7 +23,7 @@ export default function FilterStatus(props: IFilter) {
         status
       </Button>
       <Menu
-        id="simple-menu"
+        id="filter-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

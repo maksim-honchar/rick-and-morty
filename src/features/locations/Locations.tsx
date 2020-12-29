@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { episodesURL } from "../../app/utils";
+import { locationsURL } from "../../app/utils";
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import PaginationPanel from "../../components/PaginationPanel";
-import TableEpisodes from "./TableEpisodes";
+import TableLocations from "./TableCocations";
 import SearchField from "../../components/SearchField";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,20 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Episodes = () => {
+export const Locations = () => {
   const classes = useStyles();
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [episodes, setEpisodes] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
     try {
-      fetch(`${episodesURL}/?page=${currentPage}&name=${filter}`)
+      fetch(`${locationsURL}/?page=${currentPage}&name=${filter}`)
         .then((response) => response.json())
         .then((output) => {
           if (output.results) {
-            setEpisodes(output.results);
+            setLocations(output.results);
             setTotalPages(output.info.pages);
           }
         });
@@ -51,7 +51,7 @@ export const Episodes = () => {
   const viewBlock = (
     <>
       <SearchField setFilter={setFilter} />
-      <TableEpisodes episodes={episodes} />
+      <TableLocations locations={locations} />
       <PaginationPanel
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
@@ -67,7 +67,7 @@ export const Episodes = () => {
 
   return (
     <Grid container alignItems="center" justify="center">
-      {episodes.length < 1 ? spiner : viewBlock}
+      {locations.length < 1 ? spiner : viewBlock}
     </Grid>
   );
 };

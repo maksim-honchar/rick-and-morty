@@ -43,6 +43,8 @@ export default function NavPanel() {
       history.push("/");
     } else if (value === 1) {
       history.push("/episodes");
+    } else if (value === 2) {
+      history.push("/locations");
     }
   }, [value]);
 
@@ -57,7 +59,7 @@ export default function NavPanel() {
         >
           <LinkTab label="Characters" />
           <LinkTab label="Episodes" />
-          <LinkTab label="Page Three" />
+          <LinkTab label="Locations" />
         </Tabs>
       </AppBar>
     </div>
