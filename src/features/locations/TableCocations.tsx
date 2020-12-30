@@ -32,19 +32,19 @@ export default function TableLocations(props: ITableLocations) {
       <Table className={classes.table} aria-label="episodes table">
         <TableHead>
           <TableRow>
-            <TableCell>name</TableCell>
-            <TableCell>type</TableCell>
-            <TableCell>dimension</TableCell>
+            <TableCell align="center">name</TableCell>
+            <TableCell align="center">type</TableCell>
+            <TableCell align="center">dimension</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.locations.map((location) => (
             <TableRow key={location.id}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" align="center">
                 {location.name}
               </TableCell>
-              <TableCell>{location.type}</TableCell>
-              <TableCell>{location.dimension}</TableCell>
+              <TableCell align="center">{location.type}</TableCell>
+              <TableCell align="center">{location.dimension}</TableCell>
             </TableRow>
           ))}
         </TableBody>

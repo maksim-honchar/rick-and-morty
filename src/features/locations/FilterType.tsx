@@ -30,14 +30,37 @@ export default function FilterType(props: IFilter) {
         onClose={handleClose}
       >
         <MenuItem onClick={() => handleClose("")}>all types</MenuItem>
-        <MenuItem onClick={() => handleClose("gender=male")}>male</MenuItem>
-        <MenuItem onClick={() => handleClose("gender=female")}>female</MenuItem>
-        <MenuItem onClick={() => handleClose("gender=unknown")}>
-          unknown
+        <MenuItem onClick={() => handleClose("type=planet")}>planet</MenuItem>
+        <MenuItem onClick={() => handleClose("type=cluster")}>cluster</MenuItem>
+        <MenuItem onClick={() => handleClose("type=space%20station")}>
+          space station
         </MenuItem>
-        <MenuItem onClick={() => handleClose("gender=genderless")}>
-          genderless
+        <MenuItem onClick={() => handleClose("type=microverse")}>
+          microverse
         </MenuItem>
+        <MenuItem onClick={() => handleClose("type=resort")}>resort</MenuItem>
+        <MenuItem onClick={() => handleClose("type=tv")}>tv</MenuItem>
+        <MenuItem onClick={() => handleClose("type=fantasy%20town")}>
+          fantasy town
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("type=dream")}>dream</MenuItem>
+        <MenuItem onClick={() => handleClose("type=unknown")}>unknown</MenuItem>
+        <MenuItem onClick={() => handleClose("type=game")}>game</MenuItem>
+        <MenuItem onClick={() => handleClose("type=customs")}>customs</MenuItem>
+        <MenuItem onClick={() => handleClose("type=spacecraft")}>
+          spacecraft
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("type=box")}>box</MenuItem>
+        <MenuItem onClick={() => handleClose("type=teenyverse")}>
+          teenyverse
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("type=miniverse")}>
+          miniverse
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("type=dwarf%20planet")}>
+          dwarf planet
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("type=daycare")}>daycare</MenuItem>
       </Menu>
     </Fragment>
   );

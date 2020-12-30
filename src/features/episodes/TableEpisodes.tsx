@@ -27,17 +27,19 @@ export default function TableEpisodes(props: ITableEpisodes) {
       <Table className={classes.table} aria-label="episodes table">
         <TableHead>
           <TableRow>
-            <TableCell>name</TableCell>
+            <TableCell align="center">name</TableCell>
             <TableCell>air date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.episodes.map((episode) => (
             <TableRow key={episode.id}>
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
                 {episode.name}
               </TableCell>
-              <TableCell>{episode.air_date}</TableCell>
+              <TableCell component="th" scope="row">
+                {episode.air_date}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

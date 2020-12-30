@@ -9,6 +9,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import PaginationPanel from "../../components/PaginationPanel";
 import TableLocations from "./TableCocations";
 import SearchField from "../../components/SearchField";
+import FilterType from "./FilterType";
+import DimensionType from "./DimensionType";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +37,7 @@ export const Locations = () => {
 
   useEffect(() => {
     try {
-      fetch(`${locationsURL}/?page=${currentPage}&name=${filter}`)
+      fetch(`${locationsURL}/?page=${currentPage}&${filter}`)
         .then((response) => response.json())
         .then((output) => {
           if (output.results) {
@@ -50,7 +52,18 @@ export const Locations = () => {
 
   const viewBlock = (
     <>
-      <SearchField setFilter={setFilter} />
+      <Grid container direction="row" alignItems="center" justify="center">
+        <Grid item>
+          <SearchField setFilter={setFilter} />
+        </Grid>
+        <Grid item>
+          <FilterType setFilter={setFilter} setCurrentPage={setCurrentPage} />
+          <DimensionType
+            setFilter={setFilter}
+            setCurrentPage={setCurrentPage}
+          />
+        </Grid>
+      </Grid>
       <TableLocations locations={locations} />
       <PaginationPanel
         totalPages={totalPages}
@@ -64,6 +77,8 @@ export const Locations = () => {
       <CircularProgress />
     </Grid>
   );
+
+  console.log(locations);
 
   return (
     <Grid container alignItems="center" justify="center">

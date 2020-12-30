@@ -41,7 +41,7 @@ export default function SearchField(props: ISearchField) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.setFilter(request);
+    props.setFilter(`name=${request}`);
   };
 
   const handleClean = () => {

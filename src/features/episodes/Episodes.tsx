@@ -35,7 +35,7 @@ export const Episodes = () => {
 
   useEffect(() => {
     try {
-      fetch(`${episodesURL}/?page=${currentPage}&name=${filter}`)
+      fetch(`${episodesURL}/?page=${currentPage}&${filter}`)
         .then((response) => response.json())
         .then((output) => {
           if (output.results) {

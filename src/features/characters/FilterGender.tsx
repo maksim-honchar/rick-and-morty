@@ -20,7 +20,7 @@ export default function FilterGender(props: IFilter) {
   return (
     <Fragment>
       <Button aria-controls="menu" aria-haspopup="true" onClick={handleClick}>
-        type
+        gender
       </Button>
       <Menu
         id="filter-menu"
@@ -29,7 +29,7 @@ export default function FilterGender(props: IFilter) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleClose("")}>all types</MenuItem>
+        <MenuItem onClick={() => handleClose("")}>all genders</MenuItem>
         <MenuItem onClick={() => handleClose("gender=male")}>male</MenuItem>
         <MenuItem onClick={() => handleClose("gender=female")}>female</MenuItem>
         <MenuItem onClick={() => handleClose("gender=unknown")}>
