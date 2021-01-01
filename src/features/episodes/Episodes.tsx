@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { episodesURL } from "../../app/utils";
-
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
 import PaginationPanel from "../../components/PaginationPanel";
 import TableEpisodes from "./TableEpisodes";
 import SearchField from "../../components/SearchField";

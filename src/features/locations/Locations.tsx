@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { locationsURL } from "../../app/utils";
-
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
 import PaginationPanel from "../../components/PaginationPanel";
 import TableLocations from "./TableCocations";
 import SearchField from "../../components/SearchField";
@@ -77,8 +74,6 @@ export const Locations = () => {
       <CircularProgress />
     </Grid>
   );
-
-  console.log(locations);
 
   return (
     <Grid container alignItems="center" justify="center">

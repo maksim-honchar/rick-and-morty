@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-
 import Pagination from "@material-ui/lab/Pagination";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

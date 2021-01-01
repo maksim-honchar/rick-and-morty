@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { setPage, pageSelect } from "../app/navSlice";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -31,35 +33,39 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function NavPanel() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [value, setValue] = React.useState(0);
+  const page = useSelector(pageSelect);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.ChangeEvent<{}>, newpage: number) => {
+    dispatch(setPage(newpage));
   };
 
   useEffect(() => {
-    if (value === 0) {
+    if (page === 0) {
       history.push("/");
-    } else if (value === 1) {
+    } else if (page === 1) {
       history.push("/episodes");
-    } else if (value === 2) {
+    } else if (page === 2) {
       history.push("/locations");
+    } else if (page === 3) {
+      history.push("/watchlist");
     }
-  }, [value]);
+  }, [page]);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs
           variant="fullWidth"
-          value={value}
+          value={page}
           onChange={handleChange}
           aria-label="nav tabs"
         >
           <LinkTab label="Characters" />
           <LinkTab label="Episodes" />
           <LinkTab label="Locations" />
+          <LinkTab label="My watch list" />
         </Tabs>
       </AppBar>
     </div>
