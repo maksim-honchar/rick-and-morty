@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,23 +7,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles({
-  table: {
-    // maxWidth: "50vw",
-    // margin: "auto",
-  },
-});
-
 interface ITableEpisodes {
   episodes: Array<{ name: string; air_date: string; id: number }>;
 }
 
 export default function TableEpisodes(props: ITableEpisodes) {
-  const classes = useStyles();
-
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="episodes table">
+      <Table aria-label="episodes table">
         <TableHead>
           <TableRow>
             <TableCell align="center">name</TableCell>
