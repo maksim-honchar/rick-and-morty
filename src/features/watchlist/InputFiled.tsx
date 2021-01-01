@@ -55,12 +55,12 @@ export default function InputField() {
         className={clsx(classes.margin, classes.textField)}
         variant="outlined"
       >
-        <InputLabel htmlFor="outlined-episode name">watchlist</InputLabel>
+        <InputLabel htmlFor="outlined-episode name">episode name</InputLabel>
         <OutlinedInput
           id="episode name"
           value={titleEpisode}
           onChange={handleChange}
-          labelWidth={65}
+          labelWidth={100}
         />
       </FormControl>
     </form>
